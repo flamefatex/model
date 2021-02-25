@@ -143,6 +143,20 @@ func OrderByIdDesc(db *gorm.DB) *gorm.DB {
 	return db.Order("id desc")
 }
 
+
+func Preload(query string) ORMOption {
+	return func(db *gorm.DB) *gorm.DB {
+		return db.Preload(query)
+	}
+}
+
+func OrderBy(value string) ORMOption {
+	return func(db *gorm.DB) *gorm.DB {
+		return db.Order(value)
+	}
+}
+
+
 func DealContext(ctx context.Context, db *gorm.DB, op string) *gorm.DB {
 	db = db.Set("ctx", ctx)
 
